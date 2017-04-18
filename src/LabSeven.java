@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LabSeven {
@@ -21,25 +22,22 @@ public class LabSeven {
 
         // this do .. while prompts for input, validates, and then stores it if it's a good value
         do {
-            do {
-                System.out.printf("Please enter a number between %d and %d: ", MIN_STUDENTS, MAX_STUDENTS);
-                if (scnr.hasNextInt()) {
-                    num = scnr.nextInt();
+            System.out.printf("Please enter a number between %d and %d: ", MIN_STUDENTS, MAX_STUDENTS);
+            try {
+                num = scnr.nextInt();
+                System.out.printf("Student %d: %s %s\n\t GitHub: %s\n\n",
+                        num,
+                        students[num][0],
+                        students[num][1],
+                        students[num][2]);
 
-                    if ( (1 < num) && (num < MAX_STUDENTS) ){
-                        correctNum = true;
-                        System.out.printf("Student %d: %s %s\n\t GitHub: %s\n\n", num, students[num][0], students[num][1], students[num][2]);
-                    } else {
-                        correctNum = false;
-                        System.out.println("Incorrect input.");
-                    }
+            } catch(InputMismatchException notANumber) {
+                System.out.println("Incorrect input.");
+                scnr.next();
+            } catch(ArrayIndexOutOfBoundsException notInRange) {
+                System.out.println("That number is just no good.");
+            }
 
-                } else {
-                    correctNum = false;
-                    System.out.println("Incorrect input.");
-                    scnr.next();
-                }
-            } while (!correctNum);
             getPermission();
         } while (doAgain);
     }
@@ -65,6 +63,7 @@ public class LabSeven {
                 System.out.println("Incorrect input.\n");
                 correctInput = false;
             }
+            System.out.println("");
         }
         // only repeats if user input y or n
         while(!correctInput);
