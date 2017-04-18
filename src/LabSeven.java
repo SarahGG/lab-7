@@ -31,10 +31,15 @@ public class LabSeven {
                         students[num][2]);
 
             } catch(InputMismatchException notANumber) {
-                System.out.println("Incorrect input.");
+                System.err.print(notANumber.getMessage());
+                System.out.println(": that is not an absolute integer!");
                 scnr.next();
             } catch(ArrayIndexOutOfBoundsException notInRange) {
-                System.out.println("That number is just no good.");
+                System.err.print(notInRange.getMessage());
+                System.out.println(": that student does not exist!");
+            } catch (Throwable defaultCatch) {
+                System.out.print(defaultCatch.getMessage());
+                System.out.println(": unknown exception, please report to Sarah Guarino.");
             }
 
             getPermission();
