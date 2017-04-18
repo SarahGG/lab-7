@@ -17,8 +17,7 @@ public class LabSeven {
         };
         int MIN_STUDENTS = 1;
         int MAX_STUDENTS = students.length;
-        int num = 0;
-        boolean correctNum;
+        int num;
 
         // this do .. while prompts for input, validates, and then stores it if it's a good value
         do {
